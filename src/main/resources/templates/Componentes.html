@@ -1,0 +1,67 @@
+<!doctype html>
+<html  xmls:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tienda Informatica</title>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/jpg" th:href="@{/imagenes/logo.jpg}"/>
+        <link th:href="@{/Css/estilo.css}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/10727f08ef.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="fondo">
+        <div class="container-fluid tm-content-container" >
+            <nav th:replace="~{@{../fragments/menu}}"></nav>
+
+            <div class="container pt-5 my-5">
+                <div class="my-3"><button type="submit" class="btn" onclick="goBack()">Volver</button></div>
+
+                <div class=" col-sm-12 d-flex justify-content-between align-items-end mt-5">
+                    <h1 class="titulos" data-text="componentes">componentes</h1>
+                    <a href="/final/newComponentes"><i class="bi bi-house-add " style="color:white;font-size:35px;"></i></a>
+                </div>              
+                <div class="col-12">             
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>                             
+                                <th scope="col">Estado</th>
+                                <th scope="Acciones"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="componentes : ${listComponentes}">
+                                <td th:text="${componentes.id}"></td>
+                                <td th:text="${componentes.descripcion}"></td>
+                                <td th:text="${componentes.precio}"></td>
+                                <td th:text="${componentes.stock}"></td>
+                                <td th:if="${componentes.estado}==true" th:text="'Activo'"  style="color:green"></td>
+                                <td th:if="${componentes.estado}==false" th:text="'Inactivo'" style="color:red" ></td>
+                                <td>
+                                    <a th:href="@{'/editComponentes/'+${componentes.id}}"><i class="bi bi-pencil-square"style="color:white"></i></a>
+                                    &nbsp;&nbsp;
+                                    <a th:href="@{'/deleteComponentes/'+${componentes.id}}"><i class="bi bi-trash3" style="color:white"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div class="g-col-12 fixed-bottom  p-3 piePagina">
+                <div th:replace="~{@{../fragments/footer}}"></div>
+            </div>
+        </div>
+
+        <script th:src="@{/JavaScritp/js.js}" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    </body>
+</html>
